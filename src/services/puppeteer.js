@@ -19,7 +19,8 @@ class PuppeteerService {
       ],
     });
     const page = await browser.newPage();
-    await page.goto(url);
+    await page.setDefaultNavigationTimeout(0);
+    await page.goto(url,{ waitUntil: 'load', timeout: 0 });
     await page.waitForSelector("h2", { visible: true });
 
     const articles = await page.$$eval("h2", (elements) => {
